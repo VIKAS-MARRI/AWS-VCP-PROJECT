@@ -1,0 +1,23 @@
+# ─── AWS VPC Peering Lab – .gitignore ───────────────────────────────────────
+# NEVER commit any of the items below
+
+# SSH private keys
+*.pem
+*.key
+
+# Lab runtime state (contains resource IDs, NOT secrets, but still ignored
+# because it is machine-generated and changes every run)
+lab-state.json
+
+# AWS credentials / config
+.aws/
+
+# OS artefacts
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
+*~
