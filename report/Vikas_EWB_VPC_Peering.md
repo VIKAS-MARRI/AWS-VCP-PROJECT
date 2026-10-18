@@ -297,7 +297,7 @@ that need access, following the principle of least privilege.
 
 ## Bastion security group correction
 
-During the build the bastion SSH rule was first set to a wide range (157.50.0.0/16) because my ISP assigns a changing public IP. The workbook requires only my current public IPv4 as a /32, so the rule is now 157.50.x.x/32 and the /16 is removed. SSH to the bastion and ProxyJump to App-A work. Evidence: evidence/02b-bastion-sg-fix.txt. If the ISP changes my IP, the /32 must be updated; widening the rule is not the safe fix.
+During the build the bastion SSH rule was first set to a wide range (157.50.x.x/16) because my ISP assigns a changing public IP. The workbook requires only my current public IPv4 as a /32, so the rule is now 157.50.x.x/32 and the /16 is removed. SSH to the bastion and ProxyJump to App-A work. Evidence: evidence/02b-bastion-sg-fix.txt. If the ISP changes my IP, the /32 must be updated; widening the rule is not the safe fix.
 
 ## Console screenshots
 
