@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     EWB Cloud Labs – AWS VPC Peering Lab (Project 01)
     Single-file, idempotent PowerShell automation.
