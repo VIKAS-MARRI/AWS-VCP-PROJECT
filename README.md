@@ -93,3 +93,5 @@ Internet
 - `vpc-peering-lab.ps1` — idempotent PowerShell automation
 - `evidence/` — real CLI output from each stage
 - `report/Vikas_EWB_VPC_Peering.md` — full submission report (Stage 8)
+
+**Note:** the bastion SG was first opened to a wide range for a changing ISP address, then corrected to my current IP as a /32 (see evidence/02b-bastion-sg-fix.txt).

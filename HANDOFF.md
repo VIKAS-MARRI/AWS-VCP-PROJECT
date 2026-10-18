@@ -59,7 +59,7 @@ All resources listed below exist in region **`ap-south-1`** and are tagged `Proj
 | **Route Table** | `ewb-rt-a-public` | `rtb-0c607525197a715e2` | Associated to `ewb-a-public`; routes: `10.10.0.0/16 local`, `10.20.0.0/16 pcx-06a06a46ff04e3d8b`, `0.0.0.0/0 igw-0aa7c7acb8d8bdd45` | No |
 | **Route Table** | `ewb-rt-a-private` | `rtb-0e390bcf60f3feabc` | Associated to `ewb-a-private`; routes: `10.10.0.0/16 local`, `10.20.0.0/16 pcx-06a06a46ff04e3d8b` | No |
 | **Route Table** | `ewb-rt-b-private` | `rtb-0fd554d97e9da9953` | Associated to `ewb-b-private`; routes: `10.20.0.0/16 local`, `10.10.0.0/16 pcx-06a06a46ff04e3d8b` | No |
-| **Security Group** | `ewb-sg-bastion` | `sg-021017caf97fe4251` | VPC A; Ingress: TCP 22 from `157.50.0.0/16` (operator IP range) | No |
+| **Security Group** | `ewb-sg-bastion` | `sg-021017caf97fe4251` | VPC A; Ingress: TCP 22 from `157.50.x.x/32` (my current public IPv4 only; first opened as a /16, then corrected, see evidence/02b-bastion-sg-fix.txt) | No |
 | **Security Group** | `ewb-sg-app-a` | `sg-0d1a7fa830b423a7d` | VPC A; Ingress: TCP 22 from `10.10.1.10/32`, ICMP Echo from `10.20.1.10/32` | No |
 | **Security Group** | `ewb-sg-app-b` | `sg-064ca4b1db6dcf9e3` | VPC B; Ingress: TCP 22 from `10.10.1.10/32`, ICMP Echo from `10.10.2.10/32` | No |
 | **Key Pair** | `ewb-lab` | `key-0a80a06ea7407b2ff` | RSA key pair; private key stored at `~/.ssh/ewb-lab.pem` | No |
@@ -86,7 +86,7 @@ All resources listed below exist in region **`ap-south-1`** and are tagged `Proj
 
 All previously identified gaps have been resolved:
 
-1. **✅ Client Public IP Shift Fixed:** Security Group `ewb-sg-bastion` now authorizes `157.50.0.0/16` (covers operator's dynamic IP range `157.50.128.14`). SSH connectivity verified.
+1. **✅ Client Public IP Shift Fixed:** Security Group `ewb-sg-bastion` now authorizes only my current public IPv4 as a /32 (157.50.x.x/32). It was first widened to a /16 because the ISP changes my IP; that was corrected afterwards. SSH connectivity verified.
 2. **✅ Stage 4 Completed:** SSH baseline to bastion and ProxyJump to app-a verified; Test 01 (pre-peering ping failure) captured with 100% packet loss.
 3. **✅ Git Tracking Resolved:** All commits pushed to `origin/main`. Branch divergence resolved.
 4. **✅ AWS Resources Match Git Code:** All resources through Stage 8 exist and are documented in evidence files.
