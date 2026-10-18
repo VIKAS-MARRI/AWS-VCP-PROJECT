@@ -371,3 +371,28 @@ The following console screenshots confirm the configuration and operational stat
 
 *Figure 17: Instance App-B Network Details — Host: ewb-app-b (i-0077ff1eb903804b4); Test: Network audit; Result: Bound to 10.20.1.10, no public IPv4 address assigned.*
 
+---
+
+## Cleanup
+
+Upon successful execution and verification of all tests (Tests 01–05 and the controlled security group failure/recovery experiment), Stage 9 automated cleanup was executed via `vpc-peering-lab.ps1 -Cleanup`.
+
+### Resources Terminated & Removed
+
+1. **EC2 Instances (3):** Terminated `ewb-bastion` (`i-08970c0dc4cb29c2b`), `ewb-app-a` (`i-0ed91a5a28d3d248c`), and `ewb-app-b` (`i-0077ff1eb903804b4`).
+2. **EBS Volumes (3):** Root volumes automatically terminated via `DeleteOnTermination=true`.
+3. **VPC Peering Connection:** Peering routes deleted across all 3 route tables; connection `ewb-a-b-peer` (`pcx-06a06a46ff04e3d8b`) deleted.
+4. **Security Groups (3):** Deleted `ewb-sg-bastion` (`sg-021017caf97fe4251`), `ewb-sg-app-a` (`sg-0d1a7fa830b423a7d`), and `ewb-sg-app-b` (`sg-064ca4b1db6dcf9e3`).
+5. **Route Tables & Subnets:** Explicit associations removed; route tables (`rtb-0c607525197a715e2`, `rtb-0e390bcf60f3feabc`, `rtb-0fd554d97e9da9953`) deleted; subnets (`subnet-0504284fed260ff85`, `subnet-0dfebabb36e85e00e`, `subnet-00c65935f6ecc6754`) deleted.
+6. **Internet Gateway & VPCs:** Gateway `ewb-igw-a` (`igw-0aa7c7acb8d8bdd45`) detached and deleted; VPCs `ewb-vpc-a` (`vpc-085f611ada428a582`) and `ewb-vpc-b` (`vpc-033d9930b925f06bb`) deleted.
+7. **Key Pair:** Key pair `ewb-lab` (`key-0a80a06ea7407b2ff`) deleted from AWS.
+
+### Verification of Complete Cleanup
+
+Independent AWS CLI queries filtering for `Project=EWB-VPC-Peering` in region `ap-south-1` confirmed zero active lab resources remain:
+- **Instances:** 0 running, pending, or stopped instances.
+- **Volumes, Elastic IPs, Peering Connections, IGWs, SGs, Subnets, Route Tables:** All 0.
+- **VPCs:** Only the default AWS VPC (`vpc-069b6c127aa0140c2`, `172.31.0.0/16`) remains intact and untouched.
+
+**Evidence:** Full real-time execution and post-cleanup audit logs are captured in `evidence/09-cleanup.txt`.
+

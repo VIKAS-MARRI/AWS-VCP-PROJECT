@@ -5,6 +5,8 @@
 **Account:** *(see evidence/00-identity.txt)*  
 **GitHub:** https://github.com/VIKAS-MARRI/AWS-VCP-PROJECT
 
+**Status:** **COMPLETE** (Stages 0–9 Complete & Verified; All Resources Cleaned Up)
+
 ---
 
 ## Project Overview
@@ -49,18 +51,18 @@ Internet
 
 ## Stages
 
-| # | Stage | Evidence |
-|---|---|---|
-| 0 | Setup & repo init | evidence/00-identity.txt |
-| 1 | VPC A (subnets, IGW, route tables) | evidence/01-vpc-a.txt |
-| 2 | VPC B + security groups | evidence/02-vpc-b-sgs.txt |
-| 3 | Compute (key pair + 3 EC2 instances) | evidence/03-compute.txt |
-| 4 | SSH baseline + pre-peering failure | evidence/04-ssh-test01.txt |
-| 5 | VPC Peering (create + accept) | evidence/05-peering.txt |
-| 6 | Routes (3 route table entries) | evidence/06-routes.txt |
-| 7 | Verification (Tests 02-05 + controlled failure) | evidence/07-*.txt |
-| 8 | Final report | report/Vikas_EWB_VPC_Peering.md |
-| 9 | Cleanup | evidence/09-cleanup.txt |
+| # | Stage | Evidence | Status |
+|---|---|---|:---:|
+| 0 | Setup & repo init | evidence/00-identity.txt | ✅ DONE |
+| 1 | VPC A (subnets, IGW, route tables) | evidence/01-vpc-a.txt | ✅ DONE |
+| 2 | VPC B + security groups | evidence/02-vpc-b-sgs.txt | ✅ DONE |
+| 3 | Compute (key pair + 3 EC2 instances) | evidence/03-compute.txt | ✅ DONE |
+| 4 | SSH baseline + pre-peering failure | evidence/04-ssh-test01.txt | ✅ DONE |
+| 5 | VPC Peering (create + accept) | evidence/05-peering.txt | ✅ DONE |
+| 6 | Routes (3 route table entries) | evidence/06-routes.txt | ✅ DONE |
+| 7 | Verification (Tests 02-05 + controlled failure) | evidence/07-*.txt | ✅ DONE |
+| 8 | Final report | report/Vikas_EWB_VPC_Peering.md | ✅ DONE |
+| 9 | Cleanup | evidence/09-cleanup.txt | ✅ DONE |
 
 ---
 

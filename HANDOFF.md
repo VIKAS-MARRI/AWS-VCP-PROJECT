@@ -2,7 +2,7 @@
 
 **Generated:** 2026-10-18  
 **Project:** EWB Cloud Labs – AWS VPC Peering (Project 01)  
-**Status:** **COMPLETE** (Stages 0–8 Complete, Stage 9 Cleanup Pending User Confirmation)
+**Status:** **COMPLETE** (Stages 0–9 Complete & Verified; All Resources Cleaned Up)
 
 ---
 
@@ -38,7 +38,7 @@
 | **Stage 6** | Routes: Add peering routes across 3 route tables | **DONE** | `7004d1d` | [`evidence/06-routes.txt`](file:///C:/Users/vikas/EWB-VPC-Peering/evidence/06-routes.txt) |
 | **Stage 7** | Verification: Tests 02–05 & controlled failure/recovery | **DONE** | `8d8ae51` | [`evidence/07-*.txt`](file:///C:/Users/vikas/EWB-VPC-Peering/evidence/07-*.txt) |
 | **Stage 8** | Final submission report (`report/Vikas_EWB_VPC_Peering.md`) | **DONE** | `6aa3ad4` | [`report/Vikas_EWB_VPC_Peering.md`](file:///C:/Users/vikas/EWB-VPC-Peering/report/Vikas_EWB_VPC_Peering.md) |
-| **Stage 9** | Cleanup of lab resources | **PENDING** | — | Pending (`evidence/09-cleanup.txt`) |
+| **Stage 9** | Cleanup of lab resources | **DONE** | Pending commit | [`evidence/09-cleanup.txt`](file:///C:/Users/vikas/EWB-VPC-Peering/evidence/09-cleanup.txt) |
 
 ---
 
@@ -114,13 +114,18 @@ All previously identified gaps have been resolved:
 | Stage 6: Peering routes in 3 route tables | `evidence/06-routes.txt` | ✅ |
 | Stage 7: Tests 02–05 + controlled failure | `evidence/07-*.txt` (5 files) | ✅ |
 | Stage 8: Final submission report | `report/Vikas_EWB_VPC_Peering.md` | ✅ |
-| Stage 9: Cleanup evidence | `evidence/09-cleanup.txt` | ⏳ Pending |
+| Stage 9: Cleanup evidence | `evidence/09-cleanup.txt` | ✅ |
 
 ---
 
 ## 6. Git Log Summary
 
 ```
+75f0d4a docs: document strict /32 bastion SG and embed console screenshots in report
+8fc75b4 fix: tidy repo gitignore and normalize screenshot filenames
+3f14e26 docs: add labelled console screenshots to final report
+1c96eef docs: document bastion SG correction to /32 [evidence: 02b-bastion-sg-fix.txt]
+ba7d4ad docs: final handoff report - all stages 0-8 complete
 6aa3ad4 stage 8: final submission report [report: report/Vikas_EWB_VPC_Peering.md]
 8d8ae51 stage 7: verification tests 02-05 and controlled failure [evidence: evidence/07-*.txt]
 7004d1d stage 6: peering routes added to 3 route tables [evidence: evidence/06-routes.txt]
@@ -135,22 +140,14 @@ a8ab9d7 stage 4: SSH baseline + pre-peering failure (Test 01) [evidence: evidenc
 
 ---
 
-## 7. Next Action Required
+## 7. Post-Lab Manual Steps
 
-**Stage 9 Cleanup** requires explicit user confirmation before execution. To clean up all lab resources:
+All automated infrastructure stages (0–9) are complete and verified. Remaining manual actions for the student:
 
-```powershell
-.\vpc-peering-lab.ps1 -Cleanup
-```
-
-This will:
-1. Terminate all 3 EC2 instances
-2. Delete VPC peering connection and routes
-3. Delete security groups, route tables, subnets, IGW, VPCs
-4. Delete key pair from AWS (local `.pem` must be manually removed)
-5. Verify cleanup via Project tag filtering
-
-**Cost Note:** 3 x `t3.micro` instances + 1 public IPv4 + 24 GiB EBS currently running at ~$0.036/hr.
+1. **Deactivate / Delete IAM Access Key:** In the AWS IAM Console, deactivate and delete the access key for `ewb-lab-user`.
+2. **Local Cleanup:** After confirming GitHub push, remove local private key `~/.ssh/ewb-lab.pem` and lab host entries in `~/.ssh/config` and `~/.aws/credentials`.
+3. **Billing Check:** Verify the AWS Billing console the next day to confirm zero ongoing charges for EC2 instances, EBS volumes, or IPv4.
+4. **Final Submission:** Submit `report/Vikas_EWB_VPC_Peering.pdf` to the course instructor.
 
 ---
 
