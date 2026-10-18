@@ -301,3 +301,73 @@ During the build the bastion SSH rule was first set to a wide range (157.50.0.0/
 
 ## Console screenshots
 
+The following console screenshots confirm the configuration and operational status of all deployed infrastructure across AWS:
+
+![Figure 1: AWS Account & Identity Verification (Host: AWS Console; Test: Identity Check; Result: Verified IAM user ewb-lab-user on Account 328681353246)](screenshots/00-account.png)
+
+*Figure 1: AWS Account & Identity Verification — Host: AWS Management Console; Test: Identity check; Result: Account 328681353246, IAM user ewb-lab-user.*
+
+![Figure 2: VPCs Configuration (Host: AWS VPC Console; Test: VPC Inventory; Result: ewb-vpc-a and ewb-vpc-b available with DNS hostnames)](screenshots/01-vpcs.png)
+
+*Figure 2: VPCs Configuration — Host: AWS VPC Console; Test: VPC inventory verification; Result: ewb-vpc-a (10.10.0.0/16) and ewb-vpc-b (10.20.0.0/16) in Available state.*
+
+![Figure 3: Subnets Allocation (Host: AWS VPC Console; Test: Subnet CIDR Audit; Result: 3 subnets across ap-south-1a)](screenshots/02-subnets.png)
+
+*Figure 3: Subnets Allocation — Host: AWS VPC Console; Test: Subnet CIDR audit; Result: ewb-a-public (10.10.1.0/24), ewb-a-private (10.10.2.0/24), and ewb-b-private (10.20.1.0/24).*
+
+![Figure 4: Internet Gateway Attachment (Host: AWS VPC Console; Test: IGW Scope; Result: ewb-igw-a attached exclusively to VPC A)](screenshots/03-igw.png)
+
+*Figure 4: Internet Gateway Attachment — Host: AWS VPC Console; Test: IGW scope; Result: ewb-igw-a attached to ewb-vpc-a; ewb-vpc-b has no IGW.*
+
+![Figure 5: VPC A Public Route Table Routes (Host: ewb-rt-a-public; Test: Route Audit; Result: Local, IGW, and Peering routes active)](screenshots/04-rt-a-public-routes.png)
+
+*Figure 5: VPC A Public Route Table Routes — Host: ewb-rt-a-public; Test: Route audit; Result: Local (10.10.0.0/16), default (0.0.0.0/0 -> IGW), and peering (10.20.0.0/16 -> pcx-06a06a46ff04e3d8b).*
+
+![Figure 6: VPC A Public Route Table Subnet Association (Host: ewb-rt-a-public; Test: Association Check; Result: Associated with ewb-a-public)](screenshots/05-rt-a-public-assoc.png)
+
+*Figure 6: VPC A Public Route Table Association — Host: ewb-rt-a-public; Test: Subnet association; Result: Associated with ewb-a-public (10.10.1.0/24).*
+
+![Figure 7: VPC A Private Route Table Routes (Host: ewb-rt-a-private; Test: Route Audit; Result: Local and Peering routes active)](screenshots/06-rt-a-private-routes.png)
+
+*Figure 7: VPC A Private Route Table Routes — Host: ewb-rt-a-private; Test: Route audit; Result: Local (10.10.0.0/16) and peering (10.20.0.0/16 -> pcx-06a06a46ff04e3d8b).*
+
+![Figure 8: VPC A Private Route Table Subnet Association (Host: ewb-rt-a-private; Test: Association Check; Result: Associated with ewb-a-private)](screenshots/07-rt-a-private-assoc.png)
+
+*Figure 8: VPC A Private Route Table Association — Host: ewb-rt-a-private; Test: Subnet association; Result: Associated with ewb-a-private (10.10.2.0/24).*
+
+![Figure 9: VPC B Private Route Table Routes (Host: ewb-rt-b-private; Test: Route Audit; Result: Local and Return Peering routes active)](screenshots/08-rt-b-private-routes.png)
+
+*Figure 9: VPC B Private Route Table Routes — Host: ewb-rt-b-private; Test: Route audit; Result: Local (10.20.0.0/16) and return peering (10.10.0.0/16 -> pcx-06a06a46ff04e3d8b).*
+
+![Figure 10: VPC B Private Route Table Subnet Association (Host: ewb-rt-b-private; Test: Association Check; Result: Associated with ewb-b-private)](screenshots/09-rt-b-private-assoc.png)
+
+*Figure 10: VPC B Private Route Table Association — Host: ewb-rt-b-private; Test: Subnet association; Result: Associated with ewb-b-private (10.20.1.0/24).*
+
+![Figure 11: VPC Peering Connection Active State (Host: AWS VPC Console; Test: Status Check; Result: pcx-06a06a46ff04e3d8b Active)](screenshots/10-peering-active.png)
+
+*Figure 11: VPC Peering Connection Active State — Host: AWS VPC Console; Test: Status check; Result: ewb-a-b-peer (pcx-06a06a46ff04e3d8b) is Active between VPC A and VPC B.*
+
+![Figure 12: Bastion Host Security Group Inbound Rules (Host: ewb-sg-bastion; Test: Rule Audit; Result: TCP 22 restricted to 157.50.x.x/32)](screenshots/11-sg-bastion.png)
+
+*Figure 12: Bastion Host Security Group Inbound Rules — Host: ewb-sg-bastion; Test: Inbound security audit; Result: TCP port 22 authorized strictly for operator's IPv4 157.50.x.x/32.*
+
+![Figure 13: App-A Security Group Inbound Rules (Host: ewb-sg-app-a; Test: Rule Audit; Result: SSH from Bastion /32, ICMP from App-B /32)](screenshots/12-sg-app-a.png)
+
+*Figure 13: App-A Security Group Inbound Rules — Host: ewb-sg-app-a; Test: Inbound security audit; Result: SSH from 10.10.1.10/32 and ICMP echo-request from 10.20.1.10/32.*
+
+![Figure 14: App-B Security Group Inbound Rules (Host: ewb-sg-app-b; Test: Rule Audit; Result: SSH from Bastion /32, ICMP from App-A /32)](screenshots/13-sg-app-b.png)
+
+*Figure 14: App-B Security Group Inbound Rules — Host: ewb-sg-app-b; Test: Inbound security audit; Result: SSH from 10.10.1.10/32 and ICMP echo-request from 10.10.2.10/32.*
+
+![Figure 15: EC2 Instances Inventory & Status (Host: AWS EC2 Console; Test: Compute Lifecycle Audit; Result: 3 instances Running, 2/2 checks)](screenshots/14-instances.png)
+
+*Figure 15: EC2 Instances Inventory & Status — Host: AWS EC2 Console; Test: Compute audit; Result: ewb-bastion, ewb-app-a, and ewb-app-b running with 2/2 checks passed.*
+
+![Figure 16: Instance App-A Network Details (Host: ewb-app-a; Test: Network Audit; Result: Private IP 10.10.2.10, no public IP)](screenshots/15-app-a-details.png)
+
+*Figure 16: Instance App-A Network Details — Host: ewb-app-a (i-0ed91a5a28d3d248c); Test: Network audit; Result: Bound to 10.10.2.10, no public IPv4 address assigned.*
+
+![Figure 17: Instance App-B Network Details (Host: ewb-app-b; Test: Network Audit; Result: Private IP 10.20.1.10, no public IP)](screenshots/16-app-b-details.png)
+
+*Figure 17: Instance App-B Network Details — Host: ewb-app-b (i-0077ff1eb903804b4); Test: Network audit; Result: Bound to 10.20.1.10, no public IPv4 address assigned.*
+

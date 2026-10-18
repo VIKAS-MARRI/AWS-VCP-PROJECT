@@ -157,7 +157,7 @@ This will:
 ## 8. Safety Rules Maintained
 
 1. **Zero Secret Policy:** No `*.pem`, credentials, or `lab-state.json` committed.
-2. **Strict CIDR Security:** No `0.0.0.0/0` on SSH or ICMP. Bastion SG uses `/16` range for dynamic IP; App SGs use exact `/32` CIDRs.
+2. **Strict CIDR Security:** No `0.0.0.0/0` on SSH or ICMP. Bastion SG uses `157.50.x.x/32` (strict /32 CIDR); App SGs use exact `/32` CIDRs.
 3. **Default Infrastructure Preserved:** Default VPC untouched.
 4. **Scope-Limited Operations:** All AWS operations filter on `Project=EWB-VPC-Peering` and `Student=Vikas`.
 5. **User Confirmations:** Stage 3 (compute launch) and Stage 9 (cleanup) require explicit approval.
